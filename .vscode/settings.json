@@ -1,0 +1,14 @@
+{
+  "css.validate": false,
+  "tailwindCSS.validate": false,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html"
+  },
+  "tailwindCSS.experimental.configFile": "tailwind.config.ts"
+}
