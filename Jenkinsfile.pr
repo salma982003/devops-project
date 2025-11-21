@@ -8,17 +8,17 @@ pipeline {
         }
         stage('Setup') {
             steps {
-                sh 'npm ci'
+                bat 'npm ci'
             }
         }
         stage('Build Test') {
             steps {
-                sh 'npm run build || true'
+                bat 'npm run build || echo "Build failed but continuing for PR test"'
             }
         }
         stage('Smoke Test') {
             steps {
-                sh './smoke_test.sh http://localhost:3000 || true'
+                bat 'call smoke_test.bat http://localhost:3000 || echo "Smoke test failed but continuing for PR test"'
             }
         }
     }
