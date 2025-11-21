@@ -11,6 +11,11 @@ pipeline {
                 bat 'npm ci'
             }
         }
+        stage('Generate Prisma') {
+            steps {
+                bat 'npx prisma generate'
+            }
+        }
         stage('Build') {
             steps {
                 bat 'npm run build'
@@ -29,7 +34,7 @@ pipeline {
         }
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts artifacts: '**/build/**/*', fingerprint: true
+                archiveArtifacts artifacts: '**/.next/**/*', fingerprint: true
             }
         }
         stage('Cleanup') {
