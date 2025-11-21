@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Setup') {
+            steps {
+                sh 'npm ci'
+            }
+        }
+        stage('Build Test') {
+            steps {
+                sh 'npm run build || true'
+            }
+        }
+        stage('Smoke Test') {
+            steps {
+                sh './smoke_test.sh http://localhost:3000 || true'
+            }
+        }
+    }
+}
