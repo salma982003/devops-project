@@ -8,7 +8,7 @@ import { PlusCircle, Moon, Sun, Home as HomeIcon, Mail, Twitter, Linkedin, Faceb
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import PostCard from "@/components/post-card";
-
+// 🚀 Amélioration UI - Feature DevOps Demo
 interface Post {
   id: string;
   title: string;
@@ -534,6 +534,8 @@ export default function Home() {
           </div>
         </section>
 
+        
+
         {/* Contact Section */}
         <section id="contact" className="text-center space-y-6 animate-fade-in delay-500">
           <div className="relative">
@@ -582,30 +584,63 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-green-200/50 dark:border-green-900/30 text-sm text-center text-muted-foreground py-8 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm mt-auto">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <Link href="/" className="flex items-center justify-center md:justify-start gap-2 group">
-                <img 
-                  src="/salma.png"
-                  alt="Xpresinsight Logo"
-                  className="h-8 w-8 object-contain transition-transform group-hover:rotate-12"
-                />
-                <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-green-700 to-green-600 dark:from-green-400 dark:to-green-300 bg-clip-text text-transparent">
-                  Xpresinsight<span className="text-primary">Blog</span>
-                </span>
-              </Link>
-            </div>
-           
-          </div>
-          <div className="mt-6 pt-6 border-t border-green-200/30 dark:border-green-900/20">
-            <p className="text-xs text-muted-foreground/70">
-              © {new Date().getFullYear()} Xpresinsight – All rights reserved. Crafted with ♥ for the agrifood community.
+      <footer className="border-t border-green-200/50 dark:border-green-900/30 text-sm bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm mt-auto">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* Brand Section */}
+          <div className="text-center md:text-left">
+            <Link href="/" className="flex items-center justify-center md:justify-start gap-2 group mb-4">
+              <img 
+                src="/salma.png"
+                alt="Xpresinsight Logo"
+                className="h-8 w-8 object-contain transition-transform group-hover:rotate-12"
+              />
+              <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-green-700 to-green-600 dark:from-green-400 dark:to-green-300 bg-clip-text text-transparent">
+                Xpresinsight<span className="text-primary">Blog</span>
+              </span>
+            </Link>
+            <p className="text-muted-foreground text-sm max-w-xs">
+              B2B content platform focused on agrifood innovation and business growth.
             </p>
           </div>
+
+          {/* Quick Links */}
+          <div className="text-center">
+            <h4 className="font-semibold text-green-700 dark:text-green-400 mb-4">Quick Links</h4>
+            <div className="flex flex-col gap-2">
+              <Link href="/" className="text-muted-foreground hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                Home
+              </Link>
+              <Link href="#categories" className="text-muted-foreground hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                Categories
+              </Link>
+              <Link href="#about" className="text-muted-foreground hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                About
+              </Link>
+            </div>
+          </div>
+
+          {/* DevOps Info */}
+          <div className="text-center md:text-right">
+            <h4 className="font-semibold text-blue-600 dark:text-blue-400 mb-4">DevOps Project</h4>
+            <div className="text-xs text-muted-foreground space-y-1">
+              <p>✅ CI/CD Pipeline</p>
+              <p>🚀 Automated Deployment</p>
+              <p>🐳 Docker Containerized</p>
+              <p>🧪 Smoke Tests</p>
+            </div>
+          </div>
         </div>
-      </footer>
+
+        {/* Bottom Bar */}
+        <div className="pt-6 border-t border-green-200/30 dark:border-green-900/20 text-center">
+          <p className="text-xs text-muted-foreground/70">
+            © {new Date().getFullYear()} Xpresinsight – All rights reserved. | 
+            <span className="text-blue-500 ml-1">DevOps Pipeline Demo</span>
+          </p>
+        </div>
+      </div>
+    </footer>
 
       <style jsx global>{`
         @keyframes float {
