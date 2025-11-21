@@ -13,18 +13,25 @@ pipeline {
         }
         stage('Generate Prisma') {
             steps {
-                bat 'npx prisma generate || echo "⚠️ Prisma generation warning but continuing"'
+                bat '''
+                    echo "⏳ Attempting Prisma generation..."
+                    npx prisma generate && echo "✅ Prisma generation successful" || echo "⚠️ Prisma generation failed but continuing pipeline"
+                '''
             }
         }
         stage('Build') {
             steps {
-                bat 'npm run build || echo "⚠️ Build warning but continuing for demo"'
+                bat '''
+                    echo "⏳ Attempting build..."
+                    npm run build && echo "✅ Build successful" || echo "⚠️ Build failed but continuing pipeline"
+                '''
             }
         }
         stage('Run Docker') {
             steps {
                 bat 'docker build -t my-app:dev .'
                 bat 'docker run -d -p 3000:3000 --name smoke-test my-app:dev'
+                bat 'timeout /t 10 /nobreak'
             }
         }
         stage('Smoke Test') {
@@ -34,13 +41,14 @@ pipeline {
         }
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts artifacts: '**/.next/**/*', fingerprint: true
+                bat 'echo "Archiving build artifacts..."'
+                archiveArtifacts artifacts: '**/.next/**/*, **/build/**/*', fingerprint: true
             }
         }
         stage('Cleanup') {
             steps {
-                bat 'docker stop smoke-test || true'
-                bat 'docker rm smoke-test || true'
+                bat 'docker stop smoke-test || echo "No container to stop"'
+                bat 'docker rm smoke-test || echo "No container to remove"'
             }
         }
     }
