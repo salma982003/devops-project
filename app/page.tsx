@@ -8,7 +8,7 @@ import { PlusCircle, Moon, Sun, Home as HomeIcon, Mail, Twitter, Linkedin, Faceb
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import PostCard from "@/components/post-card";
-
+// 🚀 Amélioration UI - Feature DevOps Demo
 interface Post {
   id: string;
   title: string;
@@ -533,6 +533,42 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* 🚀 DevOps Pipeline Demo Section */}
+<section className="bg-gradient-to-br from-blue-50 to-green-50 dark:from-blue-900/10 dark:to-green-900/10 p-8 md:p-12 rounded-2xl shadow-lg border border-blue-200/50 dark:border-blue-900/30 text-center space-y-6 animate-fade-in delay-450 relative overflow-hidden">
+  <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+    <div className="absolute top-1/4 right-1/4 w-24 h-24 bg-blue-200/20 dark:bg-blue-800/20 rounded-full filter blur-xl"></div>
+    <div className="absolute bottom-1/4 left-1/4 w-32 h-32 bg-green-200/20 dark:bg-green-800/20 rounded-full filter blur-xl"></div>
+  </div>
+  
+  <div className="relative">
+    <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 dark:from-blue-400 dark:to-green-400 bg-clip-text text-transparent inline-block relative pb-2">
+      🚀 DevOps Pipeline Demo
+      <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-0.5 bg-gradient-to-r from-blue-500 to-green-500 rounded-full"></span>
+    </h2>
+    <p className="text-muted-foreground text-md max-w-2xl mx-auto mt-4">
+      This project demonstrates a complete CI/CD workflow with automated testing and deployment.
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+    {[
+      { icon: "🔀", title: "Git Workflow", desc: "Feature branches & PRs" },
+      { icon: "⚙️", title: "Jenkins CI/CD", desc: "3 automated pipelines" },
+      { icon: "🐳", title: "Docker", desc: "Containerization" },
+      { icon: "🧪", title: "Smoke Tests", desc: "Quality assurance" }
+    ].map((item, index) => (
+      <div 
+        key={index}
+        className="bg-white/80 dark:bg-zinc-800/80 p-6 rounded-xl shadow-sm border border-blue-200/30 dark:border-blue-800/50 flex flex-col items-center justify-center backdrop-blur-sm transition-all hover:shadow-md hover:-translate-y-1 hover:border-green-300/50"
+      >
+        <div className="text-2xl mb-3">{item.icon}</div>
+        <h3 className="font-bold text-green-700 dark:text-green-300 text-center">{item.title}</h3>
+        <p className="text-sm text-muted-foreground text-center mt-2">{item.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>
 
         {/* Contact Section */}
         <section id="contact" className="text-center space-y-6 animate-fade-in delay-500">
