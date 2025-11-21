@@ -8,23 +8,23 @@ pipeline {
         }
         stage('Setup') {
             steps {
-                sh 'npm ci'
+                bat 'npm ci'
             }
         }
         stage('Build') {
             steps {
-                sh 'npm run build'
+                bat 'npm run build'
             }
         }
         stage('Run Docker') {
             steps {
-                sh 'docker build -t my-app:dev .'
-                sh 'docker run -d -p 3000:3000 --name smoke-test my-app:dev'
+                bat 'docker build -t my-app:dev .'
+                bat 'docker run -d -p 3000:3000 --name smoke-test my-app:dev'
             }
         }
         stage('Smoke Test') {
             steps {
-                sh './smoke_test.sh http://localhost:3000'
+                bat 'call smoke_test.bat http://localhost:3000'
             }
         }
         stage('Archive Artifacts') {
@@ -34,8 +34,8 @@ pipeline {
         }
         stage('Cleanup') {
             steps {
-                sh 'docker stop smoke-test || true'
-                sh 'docker rm smoke-test || true'
+                bat 'docker stop smoke-test || true'
+                bat 'docker rm smoke-test || true'
             }
         }
     }
