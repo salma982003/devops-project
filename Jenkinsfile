@@ -25,7 +25,7 @@ pipeline {
                 }
             }
         }
-       stage('Run (Docker)') {
+      stage('Run (Docker)') {
     environment {
         DOCKER_IMAGE = 'salmachaleb66784/devops-app'
         DOCKER_TAG = "v1.0.0-${env.BUILD_NUMBER}"
@@ -41,7 +41,7 @@ pipeline {
                 bat "docker build -t ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} ."
                 
                 // Login à DockerHub
-                bat "echo %DOCKERHUB_PASS% | docker login -u %DOCKERHUB_USER% --password-stdin"
+                bat "echo ${env.DOCKERHUB_PASS} | docker login -u ${env.DOCKERHUB_USER} --password-stdin"
                 
                 // Push l'image
                 bat "docker push ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
