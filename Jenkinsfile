@@ -25,20 +25,34 @@ pipeline {
                 }
             }
         }
-        stage('Run (Docker)') {
-            steps {
-                script {
-                    try {
-                        bat 'docker build -t my-app:dev .'
-                        bat 'docker run -d -p 3000:3000 --name smoke-test my-app:dev'
-                        bat 'timeout /t 10 /nobreak'
-                    } catch (Exception e) {
-                        echo "⚠️ Docker non disponible sur ce serveur Jenkins"
-                        echo "📦 Dockerfile valide présent pour démonstration"
-                    }
-                }
+       stage('Run (Docker)') {
+    environment {
+        DOCKER_IMAGE = 'salmachaleb66784/devops-app'
+        DOCKER_TAG = "v1.0.0-${env.BUILD_NUMBER}"
+    }
+    steps {
+        script {
+            withCredentials([usernamePassword(
+                credentialsId: 'dockerhub-creds',
+                usernameVariable: 'DOCKERHUB_USER',
+                passwordVariable: 'DOCKERHUB_PASS'
+            )]) {
+                // Build l'image
+                bat "docker build -t ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} ."
+                
+                // Login à DockerHub
+                bat "echo %DOCKERHUB_PASS% | docker login -u %DOCKERHUB_USER% --password-stdin"
+                
+                // Push l'image
+                bat "docker push ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+                bat "docker tag ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} ${env.DOCKER_IMAGE}:latest"
+                bat "docker push ${env.DOCKER_IMAGE}:latest"
+                
+                echo "✅ DOCKER_IMAGE_PUSHED: ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
             }
         }
+    }
+}
         stage('Smoke Test') {
             steps {
                 script {
