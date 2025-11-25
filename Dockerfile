@@ -1,4 +1,4 @@
-# ==================== 🏗️ BUILD STAGE ====================
+# ====================  BUILD STAGE ====================
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -9,7 +9,7 @@ RUN npm ci
 COPY . .
 RUN npm run build || echo "Build completed with warnings"
 
-# ==================== 🚀 PRODUCTION STAGE ====================
+# ==================== PRODUCTION STAGE ====================
 FROM node:20-alpine AS runner
 
 WORKDIR /app
