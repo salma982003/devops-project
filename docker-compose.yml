@@ -1,8 +1,5 @@
-version: '3.8'
 services:
   blog-content:
     build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
+    ports: ["3000:3000"]
+    command: sh -c "npm run build && npm start"  
