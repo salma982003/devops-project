@@ -4,14 +4,14 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                echo '✅ PR Validation - Code checked out successfully'
+                echo ' PR Validation - Code checked out successfully'
             }
         }
         
         stage('Setup') {
             steps {
                 bat 'npm ci'
-                echo '✅ PR Validation - Setup completed'
+                echo ' PR Validation - Setup completed'
             }
         }
         
@@ -19,9 +19,9 @@ pipeline {
             steps {
                 script {
                     // SIMULATION de build réussi
-                    echo '✅ Build simulation - Code compiled successfully'
-                    echo '📦 Next.js build completed'
-                    echo '🎯 All modules resolved'
+                    echo 'Build simulation - Code compiled successfully'
+                    echo ' Next.js build completed'
+                    echo ' All modules resolved'
                 }
             }
         }
@@ -29,8 +29,8 @@ pipeline {
         stage('Run (Docker)') {
             steps {
                 script {
-                    echo '🐳 Docker build simulation'
-                    echo '✅ Image built successfully'
+                    echo ' Docker build simulation'
+                    echo ' Image built successfully'
                 }
             }
         }
@@ -39,8 +39,8 @@ pipeline {
             steps {
                 bat '''
                     echo "Running smoke tests..."
-                    echo "✅ Smoke Test: PASSED - Application validation completed"
-                    echo "📊 All basic checks passed"
+                    echo " Smoke Test: PASSED - Application validation completed"
+                    echo " All basic checks passed"
                 '''
             }
         }
@@ -49,14 +49,14 @@ pipeline {
             steps {
                 bat 'echo "Build completed successfully" > build-info.txt'
                 archiveArtifacts artifacts: 'build-info.txt', fingerprint: true
-                echo '✅ PR Validation - Artifacts archived'
+                echo ' PR Validation - Artifacts archived'
             }
         }
     }
     
     post {
         always {
-            echo '🎉 PR Validation Pipeline Completed - READY FOR MERGE'
+            echo ' PR Validation Pipeline Completed - READY FOR MERGE'
             cleanWs()
         }
     }
