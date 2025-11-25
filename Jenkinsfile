@@ -4,14 +4,14 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                echo '✅ Checkout - Code récupéré'
+                echo ' Checkout - Code récupéré'
             }
         }
         
         stage('Setup') {
             steps {
                 bat 'npm ci'
-                echo '✅ Setup - Dépendances installées'
+                echo ' Setup - Dépendances installées'
             }
         }
         
@@ -19,8 +19,8 @@ pipeline {
             steps {
                 script {
                     // Simulation de build réussi pour la démo
-                    echo '✅ Build - Application construite avec succès'
-                    echo '📦 Next.js build completed'
+                    echo ' Build - Application construite avec succès'
+                    echo ' Next.js build completed'
                 }
             }
         }
@@ -28,8 +28,8 @@ pipeline {
         stage('Run (Docker)') {
             steps {
                 script {
-                    echo '🐳 Run (Docker) - Construction image Docker'
-                    echo '✅ Image Docker créée avec succès'
+                    echo ' Run (Docker) - Construction image Docker'
+                    echo ' Image Docker créée avec succès'
                 }
             }
         }
@@ -37,8 +37,8 @@ pipeline {
         stage('Smoke Test') {
             steps {
                 bat '''
-                    echo "🚀 Smoke Test - Vérification application"
-                    echo "✅ Smoke Test: PASSED - Application fonctionnelle"
+                    echo " Smoke Test - Vérification application"
+                    echo " Smoke Test: PASSED - Application fonctionnelle"
                 '''
             }
         }
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 bat 'echo "Build réussi" > build-info.txt'
                 archiveArtifacts artifacts: 'build-info.txt', fingerprint: true
-                echo '✅ Archive Artifacts - Artefacts sauvegardés'
+                echo ' Archive Artifacts - Artefacts sauvegardés'
             }
         }
     }
